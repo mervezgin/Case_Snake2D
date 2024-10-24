@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private LevelGrid levelGrid;
+    [SerializeField] private SnakeController snakeController;
+    private void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        levelGrid = new LevelGrid(20, 20);
+        snakeController.SetUp(levelGrid);
+        levelGrid.SetUp(snakeController);
     }
 }

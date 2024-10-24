@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SnakeController : MonoBehaviour
 {
+    private LevelGrid levelGrid;
     private Vector2 gridMoveDirection;
     private Vector2 lastMoveDirection;
     private Vector2 gridPosition;
@@ -16,7 +17,13 @@ public class SnakeController : MonoBehaviour
         gridMoveDirection = new Vector2(1, 0);
         lastMoveDirection = gridMoveDirection;
     }
+    public void SetUp(LevelGrid levelGrid) { this.levelGrid = levelGrid; }
     private void Update()
+    {
+        HandleInput();
+        HandleGridMovement();
+    }
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -50,7 +57,9 @@ public class SnakeController : MonoBehaviour
         {
             gridMoveDirection = Vector2.zero;
         }
-
+    }
+    private void HandleGridMovement()
+    {
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimerMax)
         {
@@ -66,6 +75,7 @@ public class SnakeController : MonoBehaviour
             {
                 transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirection));
             }
+            levelGrid.SnakeAteFood(gridPosition);
         }
     }
     private float GetAngleFromVector(Vector2 direction)
