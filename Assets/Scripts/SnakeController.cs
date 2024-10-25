@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SnakeController : MonoBehaviour
@@ -6,6 +7,7 @@ public class SnakeController : MonoBehaviour
     private Vector2 gridMoveDirection;
     private Vector2 lastMoveDirection;
     private Vector2 gridPosition;
+    private List<Transform> snakeBodyList;
     private float gridMoveTimer;
     private float gridMoveTimerMax;
 
@@ -16,6 +18,11 @@ public class SnakeController : MonoBehaviour
         gridMoveTimer = gridMoveTimerMax;
         gridMoveDirection = new Vector2(1, 0);
         lastMoveDirection = gridMoveDirection;
+    }
+    private void Start()
+    {
+        snakeBodyList = new List<Transform>();
+        snakeBodyList.Add(this.transform);
     }
     public void SetUp(LevelGrid levelGrid) { this.levelGrid = levelGrid; }
     private void Update()
@@ -68,6 +75,12 @@ public class SnakeController : MonoBehaviour
                 lastMoveDirection = gridMoveDirection;
             }
             gridPosition += gridMoveDirection;
+
+            for (int i = snakeBodyList.Count - 1; i > 0; i--)
+            {
+                snakeBodyList[i].transform.position = snakeBodyList[i - 1].transform.position;
+            }
+
             gridMoveTimer -= gridMoveTimerMax;
 
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
@@ -87,5 +100,11 @@ public class SnakeController : MonoBehaviour
     public Vector2 GetGridPosition()
     {
         return gridPosition;
+    }
+    public void SnakeBodyGrow()
+    {
+        Transform snakeBody = Instantiate(GameAssets.instance.snakeBodyGameObject);
+        snakeBody.position = snakeBodyList[snakeBodyList.Count - 1].position;
+        snakeBodyList.Add(snakeBody);
     }
 }

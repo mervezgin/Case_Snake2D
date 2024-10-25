@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodSprite: {fileID: 21300000, guid: c3bd1ffb8de1fa441a845a659442868c, type: 3}
-  snakeBodySprite: {fileID: 21300000, guid: 699ec0eb3513a9e4d9ec52b08a8544ba, type: 3}
+  snakeBodyGameObject: {fileID: 6658108585968520028, guid: f64f31fd26beb4239a9ae167245afffc, type: 3}
 --- !u!114 &406334712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8850246810203153563, guid: 73fd1b5212fa74f65861ea621a901b4c, type: 3}
