@@ -8,5 +8,6 @@ public class GameAssets : MonoBehaviour
         instance = this;
     }
     public Sprite foodSprite;
-    public Transform snakeBodyGameObject;
+    public Sprite snakeBodySprite;
+
 }

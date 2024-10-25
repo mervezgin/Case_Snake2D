@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5029e5f40d0341f28aa78311b679bc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeBodyGameObject: {fileID: 6658108585968520028, guid: f64f31fd26beb4239a9ae167245afffc, type: 3}
 --- !u!1 &9029239652480246473
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a6389c1368f3c0348a4a4d02194be695, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e72079f5ab854a10b822e9b53b0c637, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
