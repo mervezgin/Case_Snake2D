@@ -139,7 +139,7 @@ public class SnakeController : MonoBehaviour
             {
                 snakeBodySize++;
                 CreateSnakeBody();
-                Debug.Log(snakeBodySize);
+                //Debug.Log(snakeBodySize);
             }
             if (snakeMovePositionList.Count >= snakeBodySize + 1) snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
 
