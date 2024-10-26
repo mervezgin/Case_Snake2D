@@ -129,6 +129,10 @@ public class SnakeController : MonoBehaviour
 
             }
             gridPosition += gridMoveDirectionVector;
+            if (!levelGrid.RedZone(gridPosition))
+            {
+                state = State.Dead;
+            }
 
             bool canEat = levelGrid.SnakeAteFood(gridPosition);
             if (canEat)

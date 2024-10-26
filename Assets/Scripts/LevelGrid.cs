@@ -38,4 +38,20 @@ public class LevelGrid
         }
         else { return false; }
     }
+    public bool RedZone(Vector2 gridPosition)
+    {
+        if (gridPosition.x == 0 || gridPosition.x == width || gridPosition.y == 0 || gridPosition.y == height)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void ShrinkRedZone()
+    {
+
+    }
 }
