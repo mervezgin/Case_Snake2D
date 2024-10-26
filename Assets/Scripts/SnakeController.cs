@@ -12,9 +12,15 @@ public class SnakeController : MonoBehaviour
         Right,
         Stop
     }
+    private enum State
+    {
+        Alive,
+        Dead
+    }
     private LevelGrid levelGrid;
     private Direction gridMoveDirection;
     private Direction lastMoveDirection;
+    private State state;
     private Vector2 gridPosition;
     private List<SnakeBodyPart> snakeBodyList;
     private List<SnakeMovePosition> snakeMovePositionList;
@@ -27,6 +33,7 @@ public class SnakeController : MonoBehaviour
         gridPosition = new Vector2(10, 10);
         gridMoveTimerMax = 0.2f;
         gridMoveTimer = gridMoveTimerMax;
+        state = State.Alive;
         gridMoveDirection = Direction.Right;
         lastMoveDirection = gridMoveDirection;
 
@@ -36,8 +43,16 @@ public class SnakeController : MonoBehaviour
     }
     private void Update()
     {
-        HandleInput();
-        HandleGridMovement();
+        switch (state)
+        {
+            default: break;
+            case State.Alive:
+                HandleInput();
+                HandleGridMovement();
+                break;
+            case State.Dead:
+                break;
+        }
     }
     private void HandleInput()
     {
@@ -124,12 +139,20 @@ public class SnakeController : MonoBehaviour
             }
             if (snakeMovePositionList.Count >= snakeBodySize + 1) snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
 
+            UpdateSnakeBodyPart();
+            foreach (SnakeBodyPart snakeBodyPart in snakeBodyList)
+            {
+                Vector2 snakeBodyGridPosition = snakeBodyPart.GetGridPosition();
+                if (gridPosition == snakeBodyGridPosition)
+                {
+                    state = State.Dead;
+                }
+            }
             transform.position = new Vector3(gridPosition.x, gridPosition.y);
             if (gridMoveDirection != Direction.Stop)
             {
                 transform.eulerAngles = new Vector3(0, 0, GetAngleFromVector(gridMoveDirectionVector));
             }
-            UpdateSnakeBodyPart();
         }
     }
     private float GetAngleFromVector(Vector2 direction)
@@ -178,7 +201,6 @@ public class SnakeController : MonoBehaviour
             {
                 default:
                 case Direction.Up:
-
                     switch (snakeMovePosition.GetPreviousDirection())
                     {
                         default:
@@ -186,9 +208,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Left:
                             bodyAngle = 0 + 45;
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y);// doğru
                             break;
                         case Direction.Right:
                             bodyAngle = 0 - 45;
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y + 0.2f); //doğru
                             break;
                     }
                     break;
@@ -199,10 +223,12 @@ public class SnakeController : MonoBehaviour
                             bodyAngle = 180.0f;
                             break;
                         case Direction.Left:
-                            bodyAngle = 90 + 45;
+                            bodyAngle = 180 - 45;
+                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
                             break;
                         case Direction.Right:
-                            bodyAngle = 90 - 45;
+                            bodyAngle = 180 + 45;
+                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
                             break;
                     }
                     break;
@@ -214,9 +240,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Down:
                             bodyAngle = -45;
+                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
                             break;
                         case Direction.Up:
                             bodyAngle = 45;
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y); //doğru
                             break;
                     }
                     break;
@@ -228,14 +256,20 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Down:
                             bodyAngle = 45;
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f);
                             break;
                         case Direction.Up:
                             bodyAngle = -45;
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y - 0.2f);//doğru
                             break;
                     }
                     break;
             }
             transform.eulerAngles = new Vector3(0, 0, bodyAngle);
+        }
+        public Vector2 GetGridPosition()
+        {
+            return snakeMovePosition.GetGridPosition();
         }
     }
     private class SnakeMovePosition
