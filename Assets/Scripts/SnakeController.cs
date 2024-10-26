@@ -47,8 +47,12 @@ public class SnakeController : MonoBehaviour
         {
             default: break;
             case State.Alive:
-                HandleInput();
-                HandleGridMovement();
+                if (GameManager.instance.IsGamePlaying())
+                {
+
+                    HandleInput();
+                    HandleGridMovement();
+                }
                 break;
             case State.Dead:
                 break;

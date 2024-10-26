@@ -13,6 +13,5 @@ public class ScoreBoard : MonoBehaviour
     private void Update()
     {
         scoreText.text = "Score : " + GameManager.GetScore().ToString();
-        Debug.Log("UPDATE SSCORE TEXT");
     }
 }
