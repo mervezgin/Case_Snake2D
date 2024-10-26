@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SnakeController snakeController;
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
-    private float gamePlayingTimer = 1000f;
+    private float gameLevelPlayingTimer;
+    private float gameLevelPlayingTimerMax = 10f;
     private void Awake()
     {
         instance = this;
@@ -50,12 +51,13 @@ public class GameManager : MonoBehaviour
                 if (countdownToStartTimer < 0)
                 {
                     gameStartingState = GameStartingState.GamePlaying;
+                    gameLevelPlayingTimer = gameLevelPlayingTimerMax;
                     OnStateChanged.Invoke(this, EventArgs.Empty);
                 }
                 break;
             case GameStartingState.GamePlaying:
-                gamePlayingTimer -= Time.deltaTime;
-                if (gamePlayingTimer < 0)
+                gameLevelPlayingTimer -= Time.deltaTime;
+                if (gameLevelPlayingTimer < 0)
                 {
                     gameStartingState = GameStartingState.GameOver;
                     OnStateChanged.Invoke(this, EventArgs.Empty);
@@ -99,5 +101,13 @@ public class GameManager : MonoBehaviour
     public float GetCountdownToStartTimer()
     {
         return countdownToStartTimer;
+    }
+    public float GetLevelPlayingTimerNormalized()
+    {
+        return 1 - (gameLevelPlayingTimer / gameLevelPlayingTimerMax);
+    }
+    public bool IsGameOver()
+    {
+        return gameStartingState == GameStartingState.GameOver;
     }
 }

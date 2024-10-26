@@ -90,6 +90,7 @@ public class SnakeController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Q))
         {
+            //GameManager.instance.PauseGame();
             gridMoveDirection = Direction.Stop; // burayla alakalı bir sıkıntı olabilir 
         }
     }
@@ -197,7 +198,7 @@ public class SnakeController : MonoBehaviour
         {
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.instance.snakeBodySprite;
-            //snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = -1 - bodyIndex;
+            snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = bodyIndex + 2;
             transform = snakeBodyGameObject.transform;
         }
         public void SetSnakeBodyMovePosition(SnakeMovePosition snakeMovePosition)
