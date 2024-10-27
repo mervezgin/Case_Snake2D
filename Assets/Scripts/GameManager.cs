@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
         GameOver
     }
     public event EventHandler OnStateChanged;
+    public event EventHandler OnGamePaused;
+    public event EventHandler OnGameUnPaused;
     public static GameManager instance;
     private GameStartingState gameStartingState;
     private static int score;
@@ -21,12 +23,17 @@ public class GameManager : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gameLevelPlayingTimer;
-    private float gameLevelPlayingTimerMax = 10f;
+    private float gameLevelPlayingTimerMax = 30f;
+    public bool isGamePaused = false;
     private void Awake()
     {
         instance = this;
         gameStartingState = GameStartingState.WaitingToStart;
         InitialStatic();
+
+        //PlayerPrefs.SetInt("highScore", 100);
+        //PlayerPrefs.Save();
+        Debug.Log(PlayerPrefs.GetInt("highScore"));
     }
     private void Start()
     {
@@ -57,7 +64,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStartingState.GamePlaying:
                 gameLevelPlayingTimer -= Time.deltaTime;
-                if (gameLevelPlayingTimer < 0)
+                if (gameLevelPlayingTimer < 0 || SnakeController.instance.state == SnakeController.State.Dead)
                 {
                     gameStartingState = GameStartingState.GameOver;
                     OnStateChanged.Invoke(this, EventArgs.Empty);
@@ -105,6 +112,20 @@ public class GameManager : MonoBehaviour
     public float GetLevelPlayingTimerNormalized()
     {
         return 1 - (gameLevelPlayingTimer / gameLevelPlayingTimerMax);
+    }
+    public void GamePause()
+    {
+        isGamePaused = !isGamePaused;
+        if (isGamePaused)
+        {
+            Time.timeScale = 0.0f;
+            OnGamePaused?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+            OnGameUnPaused?.Invoke(this, EventArgs.Empty);
+        }
     }
     public bool IsGameOver()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
@@ -12,15 +13,16 @@ public class SnakeController : MonoBehaviour
         Right,
         Stop
     }
-    private enum State
+    public enum State
     {
         Alive,
         Dead
     }
+    public static SnakeController instance;
     private LevelGrid levelGrid;
     private Direction gridMoveDirection;
     private Direction lastMoveDirection;
-    private State state;
+    public State state;
     private Vector2 gridPosition;
     private List<SnakeBodyPart> snakeBodyList;
     private List<SnakeMovePosition> snakeMovePositionList;
@@ -28,8 +30,10 @@ public class SnakeController : MonoBehaviour
     private float gridMoveTimerMax;
     private int snakeBodySize;
     public void SetUp(LevelGrid levelGrid) { this.levelGrid = levelGrid; }
+
     private void Awake()
     {
+        instance = this;
         gridPosition = new Vector2(10, 10);
         gridMoveTimerMax = 0.2f;
         gridMoveTimer = gridMoveTimerMax;
@@ -55,6 +59,7 @@ public class SnakeController : MonoBehaviour
                 }
                 break;
             case State.Dead:
+                GameManager.instance.IsGameOver();
                 break;
         }
     }
@@ -88,10 +93,9 @@ public class SnakeController : MonoBehaviour
                 gridMoveDirection = Direction.Right;
             }
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            //GameManager.instance.PauseGame();
-            gridMoveDirection = Direction.Stop; // burayla alakalı bir sıkıntı olabilir 
+            GameManager.instance.GamePause();
         }
     }
     private void HandleGridMovement()
@@ -144,11 +148,11 @@ public class SnakeController : MonoBehaviour
             {
                 snakeBodySize++;
                 CreateSnakeBody();
-                //Debug.Log(snakeBodySize);
             }
             if (snakeMovePositionList.Count >= snakeBodySize + 1) snakeMovePositionList.RemoveAt(snakeMovePositionList.Count - 1);
 
             UpdateSnakeBodyPart();
+
             foreach (SnakeBodyPart snakeBodyPart in snakeBodyList)
             {
                 Vector2 snakeBodyGridPosition = snakeBodyPart.GetGridPosition();
@@ -198,7 +202,7 @@ public class SnakeController : MonoBehaviour
         {
             GameObject snakeBodyGameObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
             snakeBodyGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.instance.snakeBodySprite;
-            snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = bodyIndex + 2;
+            snakeBodyGameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
             transform = snakeBodyGameObject.transform;
         }
         public void SetSnakeBodyMovePosition(SnakeMovePosition snakeMovePosition)

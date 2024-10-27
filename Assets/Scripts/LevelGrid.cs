@@ -31,6 +31,7 @@ public class LevelGrid
     {
         foodGameObject = new GameObject("Food", typeof(SpriteRenderer));
         foodGameObject.GetComponent<SpriteRenderer>().sprite = GameAssets.instance.foodSprite;
+        foodGameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
     }
     public bool SnakeAteFood(Vector2 snakeGridPosition)//void 
     {

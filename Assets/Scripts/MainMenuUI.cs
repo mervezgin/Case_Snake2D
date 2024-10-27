@@ -8,13 +8,13 @@ public class MainMenuUI : MonoBehaviour
     {
         MainMenuScene,
         GameScene,
-        HighscoreScene,
-
+        StaticsScene,
     }
     private Scene scene;
     private const string PLAY_BUTTON = "PlayButton";
     private const string QUIT_BUTTON = "QuitButton";
     private const string STATICS_BUTTON = "StaticsButton";
+
     private Button playButton;
     private Button quitButton;
     private Button staticsButton;
@@ -34,7 +34,8 @@ public class MainMenuUI : MonoBehaviour
         });
         staticsButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(Scene.HighscoreScene.ToString());
+            SceneManager.LoadScene(Scene.StaticsScene.ToString());
         });
+        Time.timeScale = 1.0f;
     }
 }
