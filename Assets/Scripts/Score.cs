@@ -61,7 +61,7 @@ public static class Score
     }
     public static int GetHighLevel()
     {
-        return PlayerPrefs.GetInt(HIGHSCORE, 1);
+        return PlayerPrefs.GetInt(HIGHLEVEL, 0);
     }
     public static bool TrySetNewHighLevel()
     {

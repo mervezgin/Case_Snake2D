@@ -29,7 +29,7 @@ public class LevelBoard : MonoBehaviour
     private void UpdateHighLevel()
     {
         int highLevel = Score.GetHighLevel();
-        //transform.Find(HIGHLEVEL_TEXT).GetComponent<Text>().text = "HIGH LEVEL\n" + highLevel.ToString();
+        transform.Find(HIGHLEVEL_TEXT).GetComponent<Text>().text = "HIGH LEVEL\n" + highLevel.ToString();
     }
     public static void HideStatic()
     {

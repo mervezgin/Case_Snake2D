@@ -223,7 +223,7 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Left:
                             bodyAngle = 0 + 45;
-                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y);
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f);
                             break;
                         case Direction.Right:
                             bodyAngle = 0 - 45;
@@ -239,11 +239,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Left:
                             bodyAngle = 180 - 45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y - 0.2f);
                             break;
                         case Direction.Right:
                             bodyAngle = 180 + 45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y - 0.2f);
                             break;
                     }
                     break;
@@ -251,15 +251,15 @@ public class SnakeController : MonoBehaviour
                     switch (snakeMovePosition.GetPreviousDirection())
                     {
                         default:
-                            bodyAngle = -90.0f;
+                            bodyAngle = 90.0f;
                             break;
                         case Direction.Down:
-                            bodyAngle = -45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);
+                            bodyAngle = 180 - 45;
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y + 0.2f);
                             break;
                         case Direction.Up:
                             bodyAngle = 45;
-                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y);
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y - 0.2f);
                             break;
                     }
                     break;
@@ -267,10 +267,10 @@ public class SnakeController : MonoBehaviour
                     switch (snakeMovePosition.GetPreviousDirection())
                     {
                         default:
-                            bodyAngle = 90.0f;
+                            bodyAngle = -90.0f;
                             break;
                         case Direction.Down:
-                            bodyAngle = 45;
+                            bodyAngle = 180 + 45;
                             transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y + 0.2f);
                             break;
                         case Direction.Up:

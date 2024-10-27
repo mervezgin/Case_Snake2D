@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnStateChanged;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameUnPaused;
-    public event EventHandler OnLevelChanged;
     public static GameManager instance;
     private GameStartingState gameStartingState;
     private static int level;
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
         Score.InitialStatic();
 
         Score.TrySetNewHighScore(10);
+        Score.TrySetNewHighLevel(1);
     }
     private void Start()
     {
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStartingState.GameOver:
                 Score.TrySetNewHighScore();
+                Score.TrySetNewHighLevel();
                 break;
             default:
                 break;
@@ -113,7 +114,7 @@ public class GameManager : MonoBehaviour
     }
     public void LevelUp()
     {
-        if (levelGrid.eatenFood == 3)
+        if (levelGrid.eatenFood == 5)
         {
             Score.AddLevel();
             levelGrid.eatenFood = 0;
