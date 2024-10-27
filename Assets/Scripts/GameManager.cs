@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnGameUnPaused;
     public static GameManager instance;
     private GameStartingState gameStartingState;
-    private static int score;
     private static int level;
     private LevelGrid levelGrid;
     [SerializeField] private SnakeController snakeController;
@@ -29,11 +28,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         gameStartingState = GameStartingState.WaitingToStart;
-        InitialStatic();
+        Score.InitialStatic();
 
-        //PlayerPrefs.SetInt("highScore", 100);
-        //PlayerPrefs.Save();
-        Debug.Log(PlayerPrefs.GetInt("highScore"));
+        Score.TrySetNewHighScore(10);
     }
     private void Start()
     {
@@ -71,19 +68,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameStartingState.GameOver:
+                Score.TrySetNewHighScore();
                 break;
             default:
                 break;
         }
     }
-    public static int GetScore()
-    {
-        return score;
-    }
-    public static void AddScore()
-    {
-        score += 10;
-    }
+
     public static int GetLevel()
     {
         return level;
@@ -92,11 +83,7 @@ public class GameManager : MonoBehaviour
     {
         level += 1;
     }
-    public static void InitialStatic()
-    {
-        score = 0;
-        level = 0;
-    }
+
     public bool IsGamePlaying()
     {
         return gameStartingState == GameStartingState.GamePlaying;
