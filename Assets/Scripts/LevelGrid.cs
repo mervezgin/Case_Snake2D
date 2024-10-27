@@ -22,7 +22,7 @@ public class LevelGrid
     {
         do
         {
-            foodGridPosition = new Vector2(Random.Range(GameManager.instance.startWidth + 1, width - 1), Random.Range(GameManager.instance.startHeight + 1, height - 1));
+            foodGridPosition = new Vector2(Random.Range(GameManager.instance.startWidth + 3, width - 3), Random.Range(GameManager.instance.startHeight + 3, height - 3));
         } while (snakeController.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
 
         CreateFood();

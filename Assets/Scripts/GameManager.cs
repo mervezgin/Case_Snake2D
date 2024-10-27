@@ -122,9 +122,15 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(levelGrid.foodGameObject);
             }
-            levelGrid = new LevelGrid(levelGrid.width - 1, levelGrid.height - 1);
+            int newWidth = levelGrid.width - 1;
+            int newHeight = levelGrid.height - 1;
             startHeight += 1;
             startWidth += 1;
+
+            Transform playBackground = GameObject.Find("PlayBackground").transform;
+            playBackground.localScale -= new Vector3(2, 2, 0);
+
+            levelGrid = new LevelGrid(newWidth, newHeight);
             snakeController.SetUp(levelGrid);
             levelGrid.SetUp(snakeController);
         }

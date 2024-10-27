@@ -93,7 +93,7 @@ public class SnakeController : MonoBehaviour
                 gridMoveDirection = Direction.Right;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameManager.instance.GamePause();
         }
@@ -223,11 +223,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Left:
                             bodyAngle = 0 + 45;
-                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y);// doğru
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y);
                             break;
                         case Direction.Right:
                             bodyAngle = 0 - 45;
-                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y + 0.2f); //doğru
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y + 0.2f);
                             break;
                     }
                     break;
@@ -239,11 +239,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Left:
                             bodyAngle = 180 - 45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
+                            transform.position = new Vector3(transform.position.x, transform.position.y);
                             break;
                         case Direction.Right:
                             bodyAngle = 180 + 45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
+                            transform.position = new Vector3(transform.position.x, transform.position.y);
                             break;
                     }
                     break;
@@ -255,11 +255,11 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Down:
                             bodyAngle = -45;
-                            transform.position = new Vector3(transform.position.x, transform.position.y);//yanlış
+                            transform.position = new Vector3(transform.position.x, transform.position.y);
                             break;
                         case Direction.Up:
                             bodyAngle = 45;
-                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y); //doğru
+                            transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y);
                             break;
                     }
                     break;
@@ -275,7 +275,7 @@ public class SnakeController : MonoBehaviour
                             break;
                         case Direction.Up:
                             bodyAngle = -45;
-                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y - 0.2f);//doğru
+                            transform.position = new Vector3(transform.position.x + 0.2f, transform.position.y - 0.2f);
                             break;
                     }
                     break;

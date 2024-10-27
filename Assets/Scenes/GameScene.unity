@@ -1642,6 +1642,8 @@ MonoBehaviour:
   gameLevelPlayingTimer: 0
   gameLevelPlayingTimerMax: 50
   isGamePaused: 0
+  startWidth: 0
+  startHeight: 0
 --- !u!4 &1115613843
 Transform:
   m_ObjectHideFlags: 0
@@ -2960,9 +2962,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1937114856}
   - component: {fileID: 1937114855}
-  - component: {fileID: 1937114857}
   m_Layer: 0
-  m_Name: Background
+  m_Name: PlayBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3038,18 +3039,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1115613843}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1937114857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937114854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72446fd97a2984d3b8d5c530e26a7394, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1969919759
 GameObject:
   m_ObjectHideFlags: 0
