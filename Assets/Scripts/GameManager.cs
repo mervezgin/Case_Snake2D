@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public event EventHandler OnStateChanged;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameUnPaused;
+    public event EventHandler OnLevelChanged;
     public static GameManager instance;
     private GameStartingState gameStartingState;
     private static int level;
@@ -21,9 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SnakeController snakeController;
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
-    private float gameLevelPlayingTimer;
-    private float gameLevelPlayingTimerMax = 30f;
+    public float gameLevelPlayingTimer;
+    public float gameLevelPlayingTimerMax = 30f;
     public bool isGamePaused = false;
+    public int startWidth = 0;
+    public int startHeight = 0;
     private void Awake()
     {
         instance = this;
@@ -74,16 +77,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-
-    public static int GetLevel()
-    {
-        return level;
-    }
-    public static void LevelUp()
-    {
-        level += 1;
-    }
-
     public bool IsGamePlaying()
     {
         return gameStartingState == GameStartingState.GamePlaying;
@@ -117,5 +110,23 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return gameStartingState == GameStartingState.GameOver;
+    }
+    public void LevelUp()
+    {
+        if (levelGrid.eatenFood == 3)
+        {
+            Score.AddLevel();
+            levelGrid.eatenFood = 0;
+            gameLevelPlayingTimer = gameLevelPlayingTimerMax;
+            if (levelGrid.foodGameObject != null)
+            {
+                Destroy(levelGrid.foodGameObject);
+            }
+            levelGrid = new LevelGrid(levelGrid.width - 1, levelGrid.height - 1);
+            startHeight += 1;
+            startWidth += 1;
+            snakeController.SetUp(levelGrid);
+            levelGrid.SetUp(snakeController);
+        }
     }
 }

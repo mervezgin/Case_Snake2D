@@ -4,9 +4,10 @@ public class LevelGrid
 {
     private SnakeController snakeController;
     private Vector2 foodGridPosition;
-    private GameObject foodGameObject;
-    private int height;
-    private int width;
+    public GameObject foodGameObject;
+    public int width;
+    public int height;
+    public int eatenFood = 0;
     public LevelGrid(int width, int height)
     {
         this.width = width;
@@ -21,7 +22,7 @@ public class LevelGrid
     {
         do
         {
-            foodGridPosition = new Vector2(Random.Range(1, width - 1), Random.Range(1, height - 1));
+            foodGridPosition = new Vector2(Random.Range(GameManager.instance.startWidth + 1, width - 1), Random.Range(GameManager.instance.startHeight + 1, height - 1));
         } while (snakeController.GetFullSnakeGridPositionList().IndexOf(foodGridPosition) != -1);
 
         CreateFood();
@@ -38,15 +39,18 @@ public class LevelGrid
         if (snakeGridPosition == foodGridPosition)
         {
             Object.Destroy(foodGameObject);
+            eatenFood++;
+            Debug.Log(eatenFood);
             SpawnFood();
             Score.AddScore();
+            GameManager.instance.LevelUp();
             return true;
         }
         else { return false; }
     }
     public bool RedZone(Vector2 gridPosition)
     {
-        if (gridPosition.x == 0 || gridPosition.x == width || gridPosition.y == 0 || gridPosition.y == height)
+        if (gridPosition.x == GameManager.instance.startWidth || gridPosition.x == width || gridPosition.y == GameManager.instance.startHeight || gridPosition.y == height)
         {
             return false;
         }
@@ -54,10 +58,6 @@ public class LevelGrid
         {
             return true;
         }
-    }
-
-    public void ShrinkRedZone()
-    {
 
     }
 }

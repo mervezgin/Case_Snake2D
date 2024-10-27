@@ -141,6 +141,8 @@ public class SnakeController : MonoBehaviour
             if (!levelGrid.RedZone(gridPosition))
             {
                 state = State.Dead;
+                Debug.Log(levelGrid.width);
+                Debug.Log(levelGrid.height);
             }
 
             bool canEat = levelGrid.SnakeAteFood(gridPosition);
