@@ -6,7 +6,6 @@ public class LevelBoard : MonoBehaviour
 {
     public static LevelBoard instance;
     private const string LEVEL_TEXT = "LevelText";
-    private const string HIGHLEVEL_TEXT = "HighLevelText";
     private Text levelText;
     private void Awake()
     {
@@ -15,22 +14,22 @@ public class LevelBoard : MonoBehaviour
     }
     private void Start()
     {
-        Score.OnHighLevelChanged += Score_OnHighLevelChanged;
-        UpdateHighLevel();
+        // Score.OnHighLevelChanged += Score_OnHighLevelChanged;
+        // UpdateHighLevel();
     }
-    private void Score_OnHighLevelChanged(object sender, EventArgs e)
-    {
-        UpdateHighLevel();
-    }
+    // private void Score_OnHighLevelChanged(object sender, EventArgs e)
+    // {
+    //     UpdateHighLevel();
+    // }
     private void Update()
     {
         levelText.text = "Level : " + Score.GetLevel().ToString();
     }
-    private void UpdateHighLevel()
-    {
-        int highLevel = Score.GetHighLevel();
-        transform.Find(HIGHLEVEL_TEXT).GetComponent<Text>().text = "HIGH LEVEL\n" + highLevel.ToString();
-    }
+    // private void UpdateHighLevel()
+    // {
+    //     int highLevel = Score.GetHighLevel();
+    //     transform.Find(HIGHLEVEL_TEXT).GetComponent<Text>().text = "HIGH LEVEL\n" + highLevel.ToString();
+    // }
     public static void HideStatic()
     {
         instance.gameObject.SetActive(false);

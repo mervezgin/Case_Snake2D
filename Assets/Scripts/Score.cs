@@ -59,30 +59,30 @@ public static class Score
     {
         level += 1;
     }
-    public static int GetHighLevel()
-    {
-        return PlayerPrefs.GetInt(HIGHLEVEL, 0);
-    }
-    public static bool TrySetNewHighLevel()
-    {
-        return TrySetNewHighLevel(level);
-    }
-    public static bool TrySetNewHighLevel(int level)
-    {
-        int highLevel = GetHighLevel();
-        if (level > highLevel)
-        {
-            PlayerPrefs.SetInt(HIGHLEVEL, level);
-            PlayerPrefs.Save();
-            if (OnHighLevelChanged != null)
-            {
-                OnHighLevelChanged(null, EventArgs.Empty);
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    // public static int GetHighLevel()
+    // {
+    //     return PlayerPrefs.GetInt(HIGHLEVEL, 0);
+    // }
+    // public static bool TrySetNewHighLevel()
+    // {
+    //     return TrySetNewHighLevel(level);
+    // }
+    // public static bool TrySetNewHighLevel(int level)
+    // {
+    //     int highLevel = GetHighLevel();
+    //     if (level > highLevel)
+    //     {
+    //         PlayerPrefs.SetInt(HIGHLEVEL, level);
+    //         PlayerPrefs.Save();
+    //         if (OnHighLevelChanged != null)
+    //         {
+    //             OnHighLevelChanged(null, EventArgs.Empty);
+    //         }
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 }

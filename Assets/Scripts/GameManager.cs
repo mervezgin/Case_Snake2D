@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         Score.InitialStatic();
 
         Score.TrySetNewHighScore(10);
-        Score.TrySetNewHighLevel(1);
+        //Score.TrySetNewHighLevel(1);
     }
     private void Start()
     {
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStartingState.GameOver:
                 Score.TrySetNewHighScore();
-                Score.TrySetNewHighLevel();
+                //Score.TrySetNewHighLevel();
                 break;
             default:
                 break;
