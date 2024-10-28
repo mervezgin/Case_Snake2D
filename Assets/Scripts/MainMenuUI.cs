@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,7 +27,11 @@ public class MainMenuUI : MonoBehaviour
         });
         quitButton.onClick.AddListener(() =>
         {
-            Application.Quit();
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+#else
+            Application.Quit;
+#endif
         });
         Time.timeScale = 1.0f;
     }
